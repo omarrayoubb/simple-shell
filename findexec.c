@@ -3,8 +3,8 @@
 * findexec - hello
 * @args: makan
 * @head: struct
-* Description: l
-* Return : path of variable
+* Description: lsdfasdff
+* Return: path of variable
 */
 char *findexec(char *args, struct linkp *head)
 {
