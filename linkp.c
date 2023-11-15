@@ -59,3 +59,23 @@ struct linkp *linkpath(char *envs)
 	free(cpy);
 	return (head);
 }
+/**
+* freepath - store all path var
+* @path: environment variable pass
+* Description: store all via linked list
+* Return: NULL
+*/
+struct linkp *freepath(struct linkp *path)
+{
+	struct linkp *tmp = path;
+
+	while (tmp)
+	{
+		tmp = tmp->p;
+		free(path->d);
+		free(path);
+		path = tmp;
+	}
+	free(tmp);
+	return (NULL);
+}

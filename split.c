@@ -87,3 +87,19 @@ void *_realloc(void *ptr, size_t size)
 
 	return (new_ptr);
 }
+/**
+* freeargs - freee
+* @args: freeeeeeeeeeeee
+* Description: free all strings
+* return: NULL
+*/
+void freeArgs(char **args) 
+{
+	size_t i = 0;
+
+	for (i = 0; args[i] != NULL; i++) 
+	{
+		free(args[i]);
+	}
+	free (args);
+}

@@ -31,4 +31,6 @@ char *findexec(char *args, struct linkp *head);
 struct linkp *free_list(struct linkp *path);
 void exec(char **args);
 void *_realloc(void *ptr, size_t size);
+void freeArgs(char **args);
+struct linkp *freepath(struct linkp *path);
 #endif

@@ -59,8 +59,9 @@ int main(void)
 			args[0] = fullpath;
 			exec(args);
 		}
+		freeArgs(args);
+		freepath(direc);
 	}
-	free(direc);
 	free(line);
 	free(fullpath);
 	return (0);
