@@ -12,7 +12,7 @@ void _CTD(ssize_t length, char *line)
 	{
 		if (isatty(STDIN_FILENO))
 		{
-			printf("\n");
+			_putchar('\n');
 			free(line);
 			exit(0);
 		}
@@ -37,7 +37,10 @@ int main(void)
 		args = NULL;
 		envs = NULL;
 		if (isatty(STDIN_FILENO))
-			printf("$ ");
+		{
+			_putchar('$');
+			_putchar(' ');
+		}
 		length = getline(&line, &size, stdin);
 		if (line[0] == '\n')
 			continue;
@@ -45,7 +48,6 @@ int main(void)
 			(line[length - 1]) = '\0';
 		_CTD(length, line);
 		args = _strtok(line, " ");
-
 		envs = getenv("PATH");
 		direc = linkpath(envs);
 		fullpath = findexec(args[0], direc);

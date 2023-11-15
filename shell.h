@@ -33,4 +33,5 @@ void exec(char **args);
 void *_realloc(void *ptr, size_t size);
 void freeArgs(char **args);
 struct linkp *freepath(struct linkp *path);
+int _putchar(char c);
 #endif
