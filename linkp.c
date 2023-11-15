@@ -21,7 +21,7 @@ struct linkp *adddir(struct linkp **head, char *dir)
 		return (NULL);
 	}
 
-	new->d = strdup(dir);
+	new->d = _strdup(dir);
 	new->p = NULL;
 	if (!*head)
 	{
@@ -48,7 +48,7 @@ struct linkp *linkpath(char *envs)
 {
 	char *token;
 	struct linkp *head = NULL;
-	char *cpy = strdup(envs);
+	char *cpy = _strdup(envs);
 
 	token = strtok(cpy, ":");
 	while (token)

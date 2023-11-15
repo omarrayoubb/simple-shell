@@ -22,7 +22,7 @@ char **_strtok(char *tok, const char *delim)
 			exit(EXIT_FAILURE);
 		}
 
-		args[i] = strdup(token);
+		args[i] = _strdup(token);
 		if (!args[i])
 		{
 			perror("strdup");
@@ -63,26 +63,33 @@ void *_realloc(void *ptr, size_t size)
 	}
 
 	if (ptr == NULL)
-	{
 		return (malloc(size));
-	}
 
 	new_ptr = malloc(size);
 
 	if (new_ptr != NULL)
 	{
+		char *old_ptr = (char *)ptr;
+		char *new_ptr_char = (char *)new_ptr;
+		size_t copy_size = size;
+		size_t old_size = 0;
 
-	size_t old_size = malloc_usable_size(ptr);
-	size_t copy_size = (size < old_size) ? size : old_size;
-	char *old_ptr = (char *)ptr;
-	char *new_ptr_char = (char *)new_ptr;
+		while (old_ptr[old_size] != '\0')
+		{
+			old_size++;
+		}
 
-	for (i = 0; i < copy_size; i++)
-	{
-		new_ptr_char[i] = old_ptr[i];
-	}
+		if (old_size < size)
+		{
+			copy_size = old_size;
+		}
 
-	free(ptr);
+		for (i = 0; i < copy_size; i++)
+		{
+			new_ptr_char[i] = old_ptr[i];
+		}
+
+		free(ptr);
 	}
 
 	return (new_ptr);

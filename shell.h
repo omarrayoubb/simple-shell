@@ -1,5 +1,4 @@
 #ifndef _SHELL_H
-
 #define _SHELL_H
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,4 +33,8 @@ void *_realloc(void *ptr, size_t size);
 void freeArgs(char **args);
 struct linkp *freepath(struct linkp *path);
 int _putchar(char c);
+size_t _strlen(const char *args);
+char *_strcat(char *dest, const char *src);
+char *_strdup(const char *str);
+char *_strcpy(char *path, const char *src);
 #endif

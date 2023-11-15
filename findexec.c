@@ -10,19 +10,27 @@ char *findexec(char *args, struct linkp *head)
 {
 	struct stat st;
 	char *path;
+	char *dent;
 	struct linkp *tmp = head;
 
 	while (tmp)
 	{
+		size_t i = 0;
+
+		dent = _strdup(tmp->d);
 		if (args[0] == '/')
 		{
-			path = strdup(args);
+			path = _strdup(args);
 			return (path);
 		}
-		path = malloc(sizeof(char) * 2 + strlen(tmp->d) + strlen(args));
-		strcpy(path, tmp->d);
-		strcat(path, "/");
-		strcat(path, args);
+		path = malloc(sizeof(char) * 2 + _strlen(tmp->d) + _strlen(args));
+		for (i = 0; i < _strlen(tmp->d); i++)
+		{
+			path[i] = dent[i];
+		}
+		path[i] = '\0';
+		_strcat(path, "/");
+		_strcat(path, args);
 		if (stat(path, &st) == 0)
 		{
 			return (path);
