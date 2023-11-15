@@ -11,28 +11,21 @@ char *findexec(char *args, struct linkp *head)
 	struct stat st;
 	char *path;
 	struct linkp *tmp = head;
-	struct dirent *rd;
 
 	while (tmp)
 	{
-		DIR *folder = opendir(tmp->d);
-
-		if (!folder)
+		if (args[0] == '/')
 		{
-			tmp = tmp->p;
-			continue;
+			path = strdup(args);
+			return (path);
 		}
 		path = malloc(sizeof(char) * 2 + strlen(tmp->d) + strlen(args));
 		strcpy(path, tmp->d);
 		strcat(path, "/");
 		strcat(path, args);
-		while ((rd = readdir(folder)) != NULL)
+		if (stat(path, &st) == 0)
 		{
-			if (stat(path, &st) == 0)
-			{
-				closedir(folder);
-				return (path);
-			}
+			return (path);
 		}
 		free(path);
 		tmp = tmp->p;

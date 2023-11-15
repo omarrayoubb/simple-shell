@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
 * _CTD - check for errors
 * @length: length of string
@@ -28,7 +27,7 @@ void _CTD(ssize_t length, char *line)
 */
 int main(void)
 {
-	char *line, **args, *envs, *fullpath;
+	char *line = '\0', **args, *envs, *fullpath;
 	struct linkp *direc;
 	size_t size = 0;
 	ssize_t length;
@@ -39,9 +38,8 @@ int main(void)
 		envs = NULL;
 		if (isatty(STDIN_FILENO))
 			printf("$ ");
-
 		length = getline(&line, &size, stdin);
-		if (length == -1)
+		if (line[0] == '\n')
 			continue;
 		if (line[length - 1] == '\n')
 			(line[length - 1]) = '\0';
