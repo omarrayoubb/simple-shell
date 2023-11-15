@@ -9,6 +9,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <malloc.h>
 extern char **environ;
 /**
 * struct linkp - linkpath
@@ -20,14 +21,14 @@ typedef struct linkp
 {
 	char *d;
 	struct linkp *p;
-}linkp;
+} linkp;
 
-void _CTD(ssize_t length, char * buff);
+void _CTD(ssize_t length, char *buff);
 char **_strtok(char *token, const char *delim);
 struct linkp *adddir(struct linkp **head, char *dir);
 struct linkp *linkpath(char *envs);
 char *findexec(char *args, struct linkp *head);
 struct linkp *free_list(struct linkp *path);
-//unsigned int _strlen(char *s1);
-//char *_strcpy(char *s1);
+void exec(char **args);
+void *_realloc(void *ptr, size_t size);
 #endif

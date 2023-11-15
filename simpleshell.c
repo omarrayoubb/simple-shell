@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
-_CTD - check for errors
-@length: length of string
-@line: the line from user
-Description: check for ending
+* _CTD - check for errors
+* @length: length of string
+* @line: the line from user
+* Description: check for ending
 */
- void _CTD(ssize_t length, char *line)
+void _CTD(ssize_t length, char *line)
 {
 	(void) line;
 	if (length == -1)
@@ -18,19 +18,19 @@ Description: check for ending
 			exit(0);
 		}
 	}
-	return;
+
 }
 /**
 * main - main
 *
 * Description: shell that execute commands
-* RETURN: 0 for success 
+* Return: 0 for success
 */
-int main()
+int main(void)
 {
 	char *line, **args, *envs, *fullpath;
-	struct linkp* direc;
-	size_t size = 0, i = 0;
+	struct linkp *direc;
+	size_t size = 0;
 	ssize_t length;
 
 	while (length != EOF)
@@ -41,18 +41,25 @@ int main()
 			printf("$ ");
 
 		length = getline(&line, &size, stdin);
+		if (length == -1)
+			continue;
 		if (line[length - 1] == '\n')
-			(line[length - 1]) = NULL;
+			(line[length - 1]) = '\0';
 		_CTD(length, line);
-
 		args = _strtok(line, " ");
 
 		envs = getenv("PATH");
 		direc = linkpath(envs);
 		fullpath = findexec(args[0], direc);
+		if (!fullpath)
+		{
+			perror("hsh");
+		}
 		if (fullpath)
 		{
-			printf("%s\n", fullpath);
+			free(args[0]);
+			args[0] = fullpath;
+			exec(args);
 		}
 	}
 	free(direc);
